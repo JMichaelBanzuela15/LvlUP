@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Level Up IRL - Transform Your Reality</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <!-- Landing Page -->
+    <div class="hero" id="landing">
+      <div class="hero-content">
+        <div class="logo-animation"></div>
+     
+        <h1>Level Up IRL</h1>
+        <p class="tagline">Transform Your Reality One Quest at a Time</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary" onclick="showAuthModal()">
+            Begin Your Journey
+          </button>
+          <button class="btn btn-secondary" onclick="scrollToFeatures()">
+            Discover More
+          </button>
+        </div>
+        <div class="features-preview">
+          <div class="feature-badge">
+            <div class="icon">💪</div>
+            <div>Fitness</div>
+          </div>
+          <div class="feature-badge">
+            <div class="icon">🧠</div>
+            <div>Intelligence</div>
+          </div>
+          <div class="feature-badge">
+            <div class="icon">💬</div>
+            <div>Social Skills</div>
+          </div>
+          <div class="feature-badge">
+            <div class="icon">⚡</div>
+            <div>Productivity</div>
+          </div>
+          <div class="feature-badge">
+            <div class="icon">✨</div>
+            <div>Confidence</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator"></div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 id="authTitle">Welcome Back</h2>
+          <button class="modal-close" onclick="closeAuthModal()">×</button>
+        </div>
+        
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+          <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+        </div>
+
+        <div class="auth-form" id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          </div>
+          <button class="btn btn-primary full-width" onclick="handleLogin()">Login</button>
+          <p class="auth-link">Don't have an account? <span onclick="switchAuthTab('register')">Sign up here</span></p>
+        </div>
+
+        <div class="auth-form" id="registerForm" style="display: none;">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" placeholder="Create a password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+          </div>
+          <button class="btn btn-primary full-width" onclick="handleRegister()">Create Account</button>
+          <p class="auth-link">Already have an account? <span onclick="switchAuthTab('login')">Login here</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app-container" id="app">
+      <div class="app-header">
+        <div class="app-logo">
+  <img src="assets/logo1.jpg" alt="logo" />
+    </div>  
+        <div class="user-info">
+          <div class="level-badge">
+            <span id="levelDisplay">Level 1</span>
+            <div class="xp-bar">
+              <div class="xp-progress" id="xpBar"></div>
+            </div>
+          </div>
+          <div class="streak-counter" id="streakCounter">🔥 0 Day Streak</div>
+          <div class="user-menu">
+            <button class="btn btn-secondary" onclick="showProfile()">
+              <span id="userName">Profile</span>
+            </button>
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Page -->
+      <div class="profile-container" id="profilePage" style="display: none;">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <div class="avatar-circle">
+              <span id="avatarInitials">U</span>
+            </div>
+            <button class="avatar-edit" onclick="editAvatar()">✏️</button>
+          </div>
+          <div class="profile-info">
+            <h2 id="profileName">User Name</h2>
+            <p id="profileEmail">user@example.com</p>
+            <div class="profile-stats">
+              <div class="profile-stat">
+                <div class="stat-number" id="profileLevel">1</div>
+                <div class="stat-label">Level</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-number" id="profileXP">0</div>
+                <div class="stat-label">Total XP</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-number" id="profileStreak">0</div>
+                <div class="stat-label">Best Streak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <div class="profile-section">
+            <h3>Achievement Badges</h3>
+            <div class="badges-grid" id="badgesGrid">
+              <div class="badge earned">
+                <div class="badge-icon">🌟</div>
+                <div class="badge-name">Getting Started</div>
+              </div>
+              <div class="badge locked">
+                <div class="badge-icon">💪</div>
+                <div class="badge-name">Fitness Warrior</div>
+              </div>
+              <div class="badge locked">
+                <div class="badge-icon">🧠</div>
+                <div class="badge-name">Knowledge Seeker</div>
+              </div>
+              <div class="badge locked">
+                <div class="badge-icon">🔥</div>
+                <div class="badge-name">7-Day Streak</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3>Progress Chart</h3>
+            <div class="progress-chart">
+              <canvas id="progressChart" width="400" height="200"></canvas>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3>Focus Areas</h3>
+            <div class="focus-areas" id="profileFocusAreas">
+              <!-- Will be populated dynamically -->
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <button class="btn btn-secondary" onclick="editProfile()">Edit Profile</button>
+            <button class="btn btn-primary" onclick="backToDashboard()">Back to Dashboard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onboarding Quiz -->
+      <div class="quiz-container" id="quiz" style="display: none;">
+        <h2 class="quiz-title">Choose Your Development Path</h2>
+        <p class="quiz-subtitle">
+          Select the areas you want to level up (you can change this anytime)
+        </p>
+        <div class="insecurity-options">
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="fitness"
+          >
+            <div class="emoji">💪</div>
+            <div class="content">
+              <h3>Physical Mastery</h3>
+              <p>
+                Build strength, improve fitness, enhance your physique and
+                health
+              </p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="intelligence"
+          >
+            <div class="emoji">🧠</div>
+            <div class="content">
+              <h3>Mental Prowess</h3>
+              <p>
+                Expand knowledge, improve focus, develop critical thinking
+                skills
+              </p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="social"
+          >
+            <div class="emoji">💬</div>
+            <div class="content">
+              <h3>Social Confidence</h3>
+              <p>
+                Master communication, build charisma, overcome social anxiety
+              </p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="productivity"
+          >
+            <div class="emoji">⚡</div>
+            <div class="content">
+              <h3>Peak Performance</h3>
+              <p>Optimize workflow, eliminate procrastination, achieve goals</p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="confidence"
+          >
+            <div class="emoji">✨</div>
+            <div class="content">
+              <h3>Self-Assurance</h3>
+              <p>Build unshakeable confidence, overcome limiting beliefs</p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="creativity"
+          >
+            <div class="emoji">🎨</div>
+            <div class="content">
+              <h3>Creative Expression</h3>
+              <p>Unlock artistic potential, develop innovative thinking</p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="leadership"
+          >
+            <div class="emoji">👑</div>
+            <div class="content">
+              <h3>Leadership Skills</h3>
+              <p>Inspire others, make decisions, guide teams to success</p>
+            </div>
+          </div>
+          <div
+            class="insecurity-card"
+            onclick="toggleSelection(this)"
+            data-category="mindfulness"
+          >
+            <div class="emoji">🧘</div>
+            <div class="content">
+              <h3>Inner Peace</h3>
+              <p>Reduce stress, improve emotional regulation, find balance</p>
+            </div>
+          </div>
+        </div>
+        <div class="quiz-complete">
+          <button
+            class="btn btn-primary"
+            onclick="completeOnboarding()"
+            id="startJourneyBtn"
+            style="display: none"
+          >
+            Start Your Journey!
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Dashboard -->
+      <div id="dashboard" style="display: none">
+        <div class="daily-feed">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="totalXP">0</div>
+              <div class="stat-label">Total XP</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="completedChallenges">0</div>
+              <div class="stat-label">Challenges Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="currentStreak">0</div>
+              <div class="stat-label">Day Streak</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="currentLevel">1</div>
+              <div class="stat-label">Current Level</div>
+            </div>
+          </div>
+
+          <h2
+            style="
+              text-align: center;
+              margin: 2rem 0;
+              color: var(--text-primary);
+            "
+          >
+            Today's Challenges
+          </h2>
+          <div id="dailyChallenges">
+            <!-- Daily challenges will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat UI -->
+    <div class="chat-button" onclick="toggleChat()" id="chatButton">💬</div>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <h3>🤖 AI Assistant</h3>
+        <div class="chat-close" onclick="toggleChat()">×</div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message ai">
+          <div class="message-bubble">
+            Hey there! I'm your personal development coach. How can I help you
+            level up today?
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input
+          type="text"
+          class="chat-input"
+          id="chatInput"
+          placeholder="Ask me anything..."
+          onkeypress="handleChatKeyPress(event)"
+        />
+        <button class="chat-send" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+      <span id="toastMessage"></span>
+    </div>
+    <!-- Load enhanced database FIRST -->
+
+
+<!-- Then load other new systems -->
+
+
+<!-- Then your existing files -->
+<script src="database.js"></script>
+<script src="auth.js"></script>
+<script src="main.js"></script>
+<script src="development-path.js"></script>
+<script src="path-integration.js"></script>
+<script src="admin-system.js"></script>
+
+<!-- Load integration LAST -->
+  </body>
+</html>
