@@ -933,19 +933,5 @@
         background: rgba(16, 185, 129, 0.1) !important;
         border-color: var(--success) !important;
       }
-.btn-warning {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
 
-.btn-warning:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(196, 129, 13, 0.4);
-}
  
